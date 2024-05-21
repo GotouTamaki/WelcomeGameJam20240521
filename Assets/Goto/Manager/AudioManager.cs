@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
+/// <summary>サウンド系の管理機能を提供します</summary>
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
@@ -37,6 +38,8 @@ public class AudioManager : MonoBehaviour
         _seSlider.onValueChanged.AddListener(SetAudioMixerSEVolume);
     }
 
+    /// <summary>BGMを再生します</summary>
+    /// <param name="bgm">BGMの種類</param>
     public void PlayBGM(BGMSoundData.BGM bgm)
     {
         BGMSoundData data = _bgmSoundData.Find(data => data.bgm == bgm);
@@ -44,6 +47,8 @@ public class AudioManager : MonoBehaviour
         _bgmAudioSource.Play();
     }
 
+    /// <summary>SEを再生します</summary>
+    /// <param name="se">SEの種類</param>
     public void PlaySE(SESoundData.SE se)
     {
         SESoundData data = _seSoundData.Find(data => data.se == se);
