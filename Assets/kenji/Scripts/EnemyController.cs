@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : CharacterBase
 {
     GameObject _player = default;    //プレイヤー
     //plaerの攻撃を引っ張る
@@ -9,12 +9,10 @@ public class EnemyController : MonoBehaviour
     [SerializeField] float m_playerSearchRangeRadius = 5f;
     /// <summary>生成する敵のプレハブ</summary>
     [SerializeField] GameObject _enemyPrefab = default;
-    /// <summary>敵を生成する場所</summary>
-    [SerializeField] Transform[] _spawnPoints = default;
     /// <summary>動く速さ</summary>
     [SerializeField] float _speed = 2f;
-    private int _eHP;
     Rigidbody2D _rb = default;
+    [SerializeField] GameObject _itemPrefab = default;
 
     int x = 0;
     int y = 0;
@@ -52,19 +50,25 @@ public class EnemyController : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (gameObject.tag == "Enemy")
+        if (gameObject.tag == "Player")
         {
-            // 敵のHPをプレイヤーのatk分、減少させる
-            //_eHP -= _player;//
-
-            if (_eHP == 0)
-            {
-
-                // オブジェクトを破壊する
-                Destroy(transform.root.gameObject);
-
-            }
+            CharacterBase characterBase = collision.gameObject.GetComponent<CharacterBase>();
+            characterBase.Damage(5);
+            AudioManager.Instance.PlaySE(SESoundData.SE.Damage);
+            Death();
         }
+        
     }
 
+    private void Death()
+    {
+        if (_maxHp <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+    private void OnDestroy()
+    {
+        Instantiate(_itemPrefab,transform.position, Quaternion.identity);    
+    }
 }
