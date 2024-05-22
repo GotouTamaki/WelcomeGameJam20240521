@@ -7,11 +7,10 @@ public class EnemyController : CharacterBase
     //plaerの攻撃を引っ張る
     /// <summary>この範囲にプレイヤーがいる場合、プレイヤーを見つけることができる</summary>
     [SerializeField] float m_playerSearchRangeRadius = 5f;
-    /// <summary>生成する敵のプレハブ</summary>
-    [SerializeField] GameObject _enemyPrefab = default;
     /// <summary>動く速さ</summary>
     [SerializeField] float _speed = 2f;
     Rigidbody2D _rb = default;
+    /// <summary>アイテムをドロップさせるために</summary>
     [SerializeField] GameObject _itemPrefab = default;
 
     int x = 0;
