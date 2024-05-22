@@ -10,6 +10,7 @@ public class BulletLauncher : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             Instantiate(_BylletPrefab, _muzzleTransform.position, _muzzleTransform.rotation);
+            AudioManager.Instance.PlaySE(SESoundData.SE.Attack);
         }
     }
 }

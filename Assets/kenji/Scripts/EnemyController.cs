@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
+
 [RequireComponent(typeof(Rigidbody2D))]
 
 public class EnemyController : CharacterBase
@@ -61,6 +63,9 @@ public class EnemyController : CharacterBase
                 y = Random.Range(-1, 0);
             }
         }
+        
+        Death();
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -72,17 +77,13 @@ public class EnemyController : CharacterBase
             _isGrounded = true;
             Random.Range(0, _jumpLimit);
         }
-
-
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (gameObject.tag == "Bullet")
         {
-            CharacterBase characterBase = collision.gameObject.GetComponent<CharacterBase>();
-            characterBase.Damage(5);
-            AudioManager.Instance.PlaySE(SESoundData.SE.Damage);
-            Death();
+            // CharacterBase characterBase = collision.gameObject.GetComponent<CharacterBase>();
+            // characterBase.Damage(5);[
         }
     }
     private void OnTriggerExit2D(Collider2D other)
@@ -92,9 +93,10 @@ public class EnemyController : CharacterBase
 
     private void Death()
     {
-        if (_maxHp <= 0)
+        if (_currentHp <= 0)
         {
             Destroy(gameObject);
+            SceneManager.LoadScene("Result");
         }
     }
     private void OnDestroy()
