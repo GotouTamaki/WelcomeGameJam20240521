@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+[RequireComponent(typeof(Rigidbody2D))]
 
 public class EnemyController : CharacterBase
 {
@@ -71,14 +72,18 @@ public class EnemyController : CharacterBase
             _isGrounded = true;
             Random.Range(0, _jumpLimit);
         }
-        if (gameObject.tag == "Player")
+
+
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (gameObject.tag == "Bullet")
         {
             CharacterBase characterBase = collision.gameObject.GetComponent<CharacterBase>();
             characterBase.Damage(5);
             AudioManager.Instance.PlaySE(SESoundData.SE.Damage);
             Death();
         }
-
     }
     private void OnTriggerExit2D(Collider2D other)
     {
