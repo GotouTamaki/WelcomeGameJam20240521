@@ -75,7 +75,7 @@ public class EnemyController : CharacterBase
 
 
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (gameObject.tag == "Bullet")
         {
