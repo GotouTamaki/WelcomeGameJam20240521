@@ -272,8 +272,29 @@ MonoBehaviour:
   _audioMixer: {fileID: 24100000, guid: efe41de980e67b245900b6ff87ff0c7e, type: 2}
   _bgmAudioSource: {fileID: 7007612830099507261}
   _seAudioSource: {fileID: 4306646313488799962}
-  _bgmSoundData: []
-  _seSoundData: []
+  _bgmSoundData:
+  - bgm: 0
+    audioClip: {fileID: 8300000, guid: f98bfdebdf3b69740b539d253e6ca280, type: 3}
+    volume: 1
+  _seSoundData:
+  - se: 0
+    audioClip: {fileID: 8300000, guid: f8b536adc5d08134f9208eefd6cf4cf3, type: 3}
+    volume: 1
+  - se: 1
+    audioClip: {fileID: 8300000, guid: ad1485426c3f16a4fbc647074f0c959c, type: 3}
+    volume: 1
+  - se: 2
+    audioClip: {fileID: 8300000, guid: ad1485426c3f16a4fbc647074f0c959c, type: 3}
+    volume: 1
+  - se: 3
+    audioClip: {fileID: 8300000, guid: ddd224556b200e542826f2fd5bfd7124, type: 3}
+    volume: 1
+  - se: 4
+    audioClip: {fileID: 8300000, guid: b58edf0fe7fa10b4f9ca01421173c080, type: 3}
+    volume: 1
+  - se: 5
+    audioClip: {fileID: 8300000, guid: ecb775583b32faf41a008f2276e8602c, type: 3}
+    volume: 1
   _masterSlider: {fileID: 6610856276798318510}
   _bgmSlider: {fileID: 4714579194373772697}
   _seSlider: {fileID: 547316215809426497}
