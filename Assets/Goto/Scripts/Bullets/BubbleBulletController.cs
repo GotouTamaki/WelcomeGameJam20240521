@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -35,7 +34,7 @@ public class BubbleBulletController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            CharacterBase characterBase = GetComponent<CharacterBase>();
+            CharacterBase characterBase = other.gameObject.GetComponent<CharacterBase>();
             characterBase.Damage(_bulletAttack);
             Destroy(this.gameObject);
         }
