@@ -30,6 +30,7 @@ public class PlayerController : CharacterBase
     #endregion
 
     public bool LookingRight => _lookingRight;
+    public float HorizontalInput => _h;
 
     // Start is called before the first frame update
     void Start()
@@ -62,9 +63,21 @@ public class PlayerController : CharacterBase
     void FlipX(float horizontal)
     {
         //画像フリップ処理
-        _sprite.flipX = horizontal < 0;
+        if (horizontal > 0)
+        {
+            //右を向いてるかのフラグ
+            _lookingRight = true;
+            gameObject.transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (horizontal < 0)
+        {
+            //右を向いてるかのフラグ
+            _lookingRight = false;
+            gameObject.transform.localScale = new Vector3(-1, 1, 1);
+        }
+        //_sprite.flipX = horizontal < 0;
         //右を向いてるかのフラグ
-        _lookingRight = horizontal > 0;
+        //_lookingRight = horizontal > 0;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
