@@ -9,9 +9,17 @@ public class EnemyController : CharacterBase
     [SerializeField] float m_playerSearchRangeRadius = 5f;
     /// <summary>動く速さ</summary>
     [SerializeField] float _speed = 2f;
+    // ジャンプする力
+    [SerializeField] float _jumpPower = 15f;
+    /// <summary>初期のジャンプ回数のリミット</summary>
+    [SerializeField] int _jumpLimit = 1;
     Rigidbody2D _rb = default;
     /// <summary>アイテムをドロップさせるために</summary>
     [SerializeField] GameObject _itemPrefab = default;
+    private bool _isGrounded = false;
+    private int _jumpInterval = 1;
+
+
 
     int x = 0;
     int y = 0;
@@ -21,6 +29,12 @@ public class EnemyController : CharacterBase
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        Invoke("Jump", Random.Range(_jumpInterval, 2f));
+    }
+    private void Jump()
+    {
+        _rb.AddForce(Vector2.up * _jumpPower, ForceMode2D.Impulse);
+        _jumpLimit++;
     }
 
 
@@ -47,8 +61,16 @@ public class EnemyController : CharacterBase
             }
         }
     }
-    void OnTriggerEnter2D(Collider2D collision)
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
+
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            _jumpLimit = 0;
+            _isGrounded = true;
+            Random.Range(0, _jumpLimit);
+        }
         if (gameObject.tag == "Player")
         {
             CharacterBase characterBase = collision.gameObject.GetComponent<CharacterBase>();
@@ -56,6 +78,11 @@ public class EnemyController : CharacterBase
             AudioManager.Instance.PlaySE(SESoundData.SE.Damage);
             Death();
         }
+
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        _isGrounded = false;
     }
 
     private void Death()
