@@ -101,8 +101,9 @@ public class BGMSoundData
     // これがラベルになる
     public enum BGM
     {
-        Title,
         InGame,
+        GameClear,
+        GameOver,
     }
 
     public BGM bgm;
@@ -117,7 +118,10 @@ public class SESoundData
     public enum SE
     {
         Attack,
-        Damage,
+        PlayerDamage,
+        EnemyDamage,
+        Jump,
+        EnemyCrushing,
         GetItem,
     }
 
