@@ -14,5 +14,6 @@ public class CharacterBase : MonoBehaviour
     public void Damage(float damage)
     {
         _currentHp -= damage;
+        AudioManager.Instance.PlaySE(SESoundData.SE.PlayerDamage);
     }
 }

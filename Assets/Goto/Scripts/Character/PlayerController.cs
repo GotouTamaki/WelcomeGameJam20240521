@@ -52,6 +52,7 @@ public class PlayerController : CharacterBase
             // ジャンプの力を加える
             _rigidbody2D.AddForce(Vector2.up * _jumpPower, ForceMode2D.Impulse);
             _jumpCount++;
+            AudioManager.Instance.PlaySE(SESoundData.SE.Jump);
         }
 
         // 入力に応じて左右を反転させる
