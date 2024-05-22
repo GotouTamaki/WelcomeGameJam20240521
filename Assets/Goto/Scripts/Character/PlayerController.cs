@@ -31,6 +31,7 @@ public class PlayerController : CharacterBase
 
     public bool LookingRight => _lookingRight;
     public float HorizontalInput => _h;
+    public bool IsDead => _currentHp <= 0;
 
     // Start is called before the first frame update
     void Start()
