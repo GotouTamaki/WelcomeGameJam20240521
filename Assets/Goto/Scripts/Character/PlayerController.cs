@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CapsuleCollider2D))]
@@ -53,6 +55,11 @@ public class PlayerController : CharacterBase
 
         // 入力に応じて左右を反転させる
         FlipX(_h);
+
+        if (IsDead)
+        {
+            Death();
+        }
     }
 
     private void FixedUpdate()
@@ -78,6 +85,19 @@ public class PlayerController : CharacterBase
         //_sprite.flipX = horizontal < 0;
         //右を向いてるかのフラグ
         //_lookingRight = horizontal > 0;
+    }
+
+    private void Death()
+    {
+        SceneManager.LoadScene("Clear");
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Damage(1);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
