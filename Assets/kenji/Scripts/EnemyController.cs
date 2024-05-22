@@ -56,7 +56,6 @@ public class EnemyController : CharacterBase
             AudioManager.Instance.PlaySE(SESoundData.SE.Damage);
             Death();
         }
-        
     }
 
     private void Death()

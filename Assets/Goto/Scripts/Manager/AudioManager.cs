@@ -36,6 +36,9 @@ public class AudioManager : MonoBehaviour
         _masterSlider.onValueChanged.AddListener(SetAudioMixerMasterVolume);
         _bgmSlider.onValueChanged.AddListener(SetAudioMixerBGMVolume);
         _seSlider.onValueChanged.AddListener(SetAudioMixerSEVolume);
+        SetAudioMixerMasterVolume(_masterSlider.value);
+        SetAudioMixerBGMVolume(_bgmSlider.value);
+        SetAudioMixerSEVolume(_seSlider.value);
     }
 
     /// <summary>BGMを再生します</summary>
